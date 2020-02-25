@@ -144,8 +144,7 @@ export const Index = () => {
   return (
     <StyledApp>
       <header className="flex">
-        <NxLogo alt="" width="75" height="50" />
-        <h1>Welcome to events! [{environment.production ? 'PROD' : 'DEV'}]</h1>
+        <h1>Welcome to events!</h1>
       </header>
       <main>
         <h2>Resources &amp; Tools</h2>
