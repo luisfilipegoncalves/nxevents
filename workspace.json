@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "projects": {
+    "events": {
+      "root": "apps/events",
+      "sourceRoot": "apps/events",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/next:build",
+          "options": {
+            "root": "apps/events",
+            "outputPath": "dist/apps/events"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/next:dev-server",
+          "options": {
+            "buildTarget": "events:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "events:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "builder": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "events:build:production"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/events/.eslintrc",
+            "tsConfig": [
+              "apps/events/tsconfig.json",
+              "apps/events/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/events/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/events/jest.config.js",
+            "tsConfig": "apps/events/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "events-e2e": {
+      "root": "apps/events-e2e",
+      "sourceRoot": "apps/events-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/events-e2e/cypress.json",
+            "tsConfig": "apps/events-e2e/tsconfig.e2e.json",
+            "devServerTarget": "events:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "events:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/events-e2e/.eslintrc",
+            "tsConfig": ["apps/events-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/events-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/next"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/react": {
+      "application": {
+        "linter": "eslint",
+        "babel": true
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nx-plugin": {
+      "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "events"
+}

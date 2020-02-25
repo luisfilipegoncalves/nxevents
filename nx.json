@@ -1,0 +1,22 @@
+{
+  "npmScope": "nxevents",
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "events": {
+      "tags": []
+    },
+    "events-e2e": {
+      "tags": [],
+      "implicitDependencies": ["events"]
+    }
+  }
+}
